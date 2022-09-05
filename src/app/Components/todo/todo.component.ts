@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { TodoRemove } from 'src/app/actions/todo.actions';
 import { Todo } from 'src/app/models/Todo';
 
 @Component({
@@ -9,6 +10,10 @@ import { Todo } from 'src/app/models/Todo';
 })
 export class TodoComponent implements OnInit {
   todos: Todo[];
+
+  removeTodo(index:number){
+    this.store.dispatch(new TodoRemove(index))
+  }
 
   constructor(private store: Store<{todos:Todo[]}>) { 
     store.pipe(select('todos')).subscribe((values)=>{
